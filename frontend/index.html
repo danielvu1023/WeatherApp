@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather App</title>
+    <link rel="stylesheet" href="styles/index.css">
+</head>
+<body>
+    <section class="section" id="titleSection">
+        <div class="container">
+            <h1>What is the weather today?</h1>
+        </div>
+    </section>
+    <section class="section" id="InputSection">
+        <div class="container">
+            <div class="cityNameInputContainer">
+                <input
+                  type="text"
+                  id="CityNameInput"
+                  placeholder="Enter a city name"
+                />
+                <button id="CityNameSubmit">Search</button>
+            </div>
+            <div class="searchOptionsContainer">
+                <input type="radio" class="searchOption" name = "searchOption" value = "currentWeather">
+                <label for="" class="searchOptionLabel">Current Weather</label>
+                <input type="radio" class="searchOption" name = "searchOption" value = "forecastWeather">
+                <label for="" class="searchOptionLabel">Forecast Weather</label>
+            </div>
+            <section class="section" id="WeatherResultsSection">
+                <div class="container">
+                    <div class="card">
+                        <div class="cardContainer">
+                            <h4 class="cardTitle">Irvine</h4>
+                            <p class="cardContent">City Weather: 40°F</p>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="cardContainer">
+                            <h4 class="cardTitle">West Covina</h4>
+                            <p class="cardContent">City Weather: 66°F</p>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="cardContainer">
+                            <h4 class="cardTitle">San Jose</h4>
+                            <p class="cardContent">City Weather: 83°F</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </section>
+</body>
+</html>
