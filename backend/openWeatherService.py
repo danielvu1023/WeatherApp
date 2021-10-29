@@ -14,7 +14,7 @@ class OpenWeatherService:
 
     def getForecast(self, city_name: str):
         endpoint = "https://api.openweathermap.org/data/2.5/forecast"
-        queryParams = {"q": city_name, "appid": self.api_key}
+        queryParams = {"q": city_name, "appid": self.api_key, "units": "imperial"}
         response = self.api_service.makeGetRequest(endpoint, queryParams)
 
         return response

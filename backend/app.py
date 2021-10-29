@@ -43,6 +43,34 @@ def getCurrentWeatherOfCity(cityName):
         response  = weatherDataResponse
 
     return jsonify(response)
+
 # Get Forecast Weather
+@app.route("/weather/forecast", methods=['GET'])
+def getForecastWeatherOfCity():
+    cityName = request.args.get("q")
+    weatherDataResponse = weatherService.getForecast(cityName)
+    print(weatherDataResponse)
+    
+    if(weatherDataResponse.get("statusCode") == 200):
+        weatherDataList = []
+        for date in weatherDataResponse.get("data").get("list"):
+            currentDate = date.get("dt_txt")
+            currentTemp = date.get("main").get("temp")
+            weatherDataList.append({
+                "currentTime": currentDate, 
+                "temperature": currentTemp
+                })
+        response  = {
+            "statusCode": 200,
+            "weatherData": {
+                "cityName": cityName,
+                "forecastList": weatherDataList
+            }
+        }
+    else:
+        response  = weatherDataResponse
+
+    return jsonify(response)
+
 
 # POST Current and Forecast
