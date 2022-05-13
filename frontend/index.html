@@ -1,58 +1,58 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="stylesheet" href="./styles/index.css" />
     <title>Weather App</title>
-    <link rel="stylesheet" href="styles/index.css">
-    <script src="./scripts/index.js">  </script> 
-</head>
-<body>
-    <section class="section" id="titleSection">
-        <div class="container">
-            <h1>What is the weather today?</h1>
-        </div>
+  </head>
+  <body>
+    <section class="section" id="TitleSection">
+      <div class="container">
+        <h1>What is the Weather Like?</h1>
+      </div>
     </section>
     <section class="section" id="InputSection">
-        <div class="container">
+      <div class="container">
+        <form id="searchWeather">
             <div class="cityNameInputContainer">
-                <input
-                  type="text"
-                  id="CityNameInput"
-                  placeholder="Enter a city name"
-                />
-                <button id="CityNameSubmit">Search</button>
+              <input
+                type="text"
+                id="CityNameInput"
+                placeholder="Enter a city name"
+              />
+              <button id="CityNameSubmit" type="submit">Search</button>
             </div>
             <div class="searchOptionsContainer">
-                <input type="radio" class="searchOption" name = "searchOption" value = "currentWeather">
-                <label for="" class="searchOptionLabel">Current Weather</label>
-                <input type="radio" class="searchOption" name = "searchOption" value = "forecastWeather">
-                <label for="" class="searchOptionLabel">Forecast Weather</label>
+              <input
+                class="searchOption"
+                style="margin-left: 0"
+                type="radio"
+                value="currentWeather"
+                name="searchOption"
+                id="SearchCurrentWeather"
+                
+              />
+              <label class="searchOptionLabel">Current Weather</label>
+              <input
+                class="searchOption"
+                type="radio"
+                value="forecastWeather"
+                name="searchOption"
+                id="SearchForecastWeather"
+              />
+              <label class="searchOptionLabel">Forecast Weather</label>
             </div>
-            <section class="section" id="WeatherResultsSection">
-                <div class="container">
-                    <div class="card">
-                        <div class="cardContainer">
-                            <h4 class="cardTitle">Irvine</h4>
-                            <p class="cardContent">City Weather: 40°F</p>
-                        </div>
-                    </div>
-                    <div class="card">
-                        <div class="cardContainer">
-                            <h4 class="cardTitle">West Covina</h4>
-                            <p class="cardContent">City Weather: 66°F</p>
-                        </div>
-                    </div>
-                    <div class="card">
-                        <div class="cardContainer">
-                            <h4 class="cardTitle">San Jose</h4>
-                            <p class="cardContent">City Weather: 83°F</p>
-                        </div>
-                    </div>
-                </div>
-            </section>
+          </form>
         </div>
+      </div>
     </section>
-</body>
+    <section class="section" id="WeatherResultsSection">
+      <div class="container" id="weatherResultsContainer">
+      </div>
+    </section>
+    <script src="./scripts/index.js"></script>
+  </body>
 </html>

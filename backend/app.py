@@ -1,31 +1,13 @@
 from flask import Flask, request, jsonify
 from openWeatherService import OpenWeatherService
+from flask_cors import CORS
 
 app = Flask(__name__)
 weatherService = OpenWeatherService(
 "Dd29faab298c99921ec95069c3b99bfe"
 )
-
-@app.route("/")
-def hello_world():
-    return "Hello World"
-
-# Path Param
-@app.route("/name/<name>", methods=['GET', 'POST'])
-def path_param_test(name):
-    return "Hello " + name
-
-# Query Param
-@app.route("/query")
-def query_param_test():
-    print(request.args)
-    return "Hello " + request.args.get("person")
-
-# JSON Body POST
-@app.route("/body", methods=['POST'])
-def body_test():
-    print(request.get_json())
-    return jsonify(request.get_json())
+# Cors lets programs not in the same domain call our API 
+CORS(app)
 
 # Get Current Weather
 @app.route("/weather/current/<cityName>", methods=['GET'])
@@ -49,7 +31,6 @@ def getCurrentWeatherOfCity(cityName):
 def getForecastWeatherOfCity():
     cityName = request.args.get("q")
     weatherDataResponse = weatherService.getForecast(cityName)
-    print(weatherDataResponse)
     
     if(weatherDataResponse.get("statusCode") == 200):
         weatherDataList = []
@@ -60,11 +41,29 @@ def getForecastWeatherOfCity():
                 "currentTime": currentDate, 
                 "temperature": currentTemp
                 })
+        freqCounter = {}
+        tempTracker = {} 
+        previous = ""  
+        for weather in weatherDataList:
+            if weather["currentTime"][9] not in freqCounter:
+                if previous != "":
+                    prevFreq = str(int(weather["currentTime"][9]) - 1)
+                    tempTracker[previous] /= freqCounter[prevFreq] 
+                    tempTracker[previous] = round(tempTracker[previous], 2)
+                freqCounter[weather["currentTime"][9]] = 1
+                tempTracker[weather["currentTime"][0:10]] = weather["temperature"]
+                previous = weather["currentTime"][0:10]
+            elif weatherDataList.index(weather) == len(weatherDataList) - 1:
+                tempTracker[weather["currentTime"][0:10]] /= freqCounter[weather["currentTime"][9]]
+                tempTracker[weather["currentTime"][0:10]] = round(tempTracker[weather["currentTime"][0:10]], 2)
+            else:
+                freqCounter[weather["currentTime"][9]] += 1
+                tempTracker[weather["currentTime"][0:10]] += weather["temperature"]     
         response  = {
             "statusCode": 200,
             "weatherData": {
                 "cityName": cityName,
-                "forecastList": weatherDataList
+                "forecastList": tempTracker
             }
         }
     else:
@@ -73,4 +72,6 @@ def getForecastWeatherOfCity():
     return jsonify(response)
 
 
-# POST Current and Forecast
+if __name__ == '__main__':
+    app.run()
+

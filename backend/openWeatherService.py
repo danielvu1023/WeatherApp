@@ -1,5 +1,5 @@
 # This service will call Open Weather's API so we can get weather data
-from aPIService import ApiService
+from apiService import ApiService
 class OpenWeatherService:
     def __init__(self, api_key: str):
         self.api_key = api_key

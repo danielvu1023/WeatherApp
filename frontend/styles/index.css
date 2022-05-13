@@ -50,6 +50,10 @@
   font-weight: 400;
 }
 
+#cardRow {
+  display: flex;
+  justify-content: space-between;
+}
 /* Title Section Style */
 #titleSection {
   height: 50px;
@@ -109,17 +113,17 @@
 }
 
 #InputSection .searchOptionsContainer {
-    margin-top: 5px;
-    display: block;
+  margin-top: 5px;
+  display: block;
 }
 
 /* Weather Results Section */
-#WeatherResultsSection{
-    margin-top: 50px;
+#WeatherResultsSection {
+  margin-top: 50px;
 }
 
-#WeatherResultsSection .card{
-    margin-top: 15px;
-    display: block;
-    width: 100%;
+#WeatherResultsSection .card {
+  margin-top: 15px;
+  display: block;
+  width: 100%;
 }
